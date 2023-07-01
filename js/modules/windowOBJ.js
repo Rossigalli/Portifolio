@@ -17,7 +17,7 @@ export class windowOBJ {
 
         this.page = document.createElement("iframe");
         this.page.id = title + "_iframe";
-        this.page.src = window.location.href + "/pages/" + title + ".html";
+        this.page.src = window.location.href + "pages/" + title + ".html";
 
         this.window.appendChild(this.header);
         this.window.appendChild(this.page);
