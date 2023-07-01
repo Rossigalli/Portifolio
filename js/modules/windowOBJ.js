@@ -1,4 +1,4 @@
-class windowOBJ {
+export class windowOBJ {
     constructor(title) {
         this.title = title;
         this.window = document.createElement("div");
@@ -16,15 +16,25 @@ class windowOBJ {
         this.header.appendChild(this.closeButton);
 
         this.page = document.createElement("iframe");
-        this.page.src = "pages/" + title + ".html";
+        this.page.id = title + "_iframe";
+        this.page.src = window.location.href + "/pages/" + title + ".html";
 
         this.window.appendChild(this.header);
         this.window.appendChild(this.page);
         this.window.classList.add("window");
 
-        document.getElementById("App").appendChild(this.window);
+        document.body.appendChild(this.window);
 
         this.dragElement(this.window);
+    }
+
+    static getWindowOBJ(title) {
+        if (!document.getElementById(title)) {
+            return new windowOBJ(title);
+        }
+        else {
+            return document.getElementById(title);
+        }
     }
 
     close() {
@@ -67,5 +77,3 @@ class windowOBJ {
         }
     }
 }
-
-export { windowOBJ };

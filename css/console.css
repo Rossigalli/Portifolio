@@ -10,28 +10,26 @@
      color: #d6d6d6;
  }
 
- table {
-     border-spacing: 20px 5px;
- }
-
  td {
+     padding-right: 10px;
+     padding-top: 3px;
      vertical-align: text-top;
  }
 
- #Console {
+ #Console_container {
      position: relative;
      display: flex;
      flex-direction: column;
      width: 100%;
      height: calc(100% - 25px);
-     padding: 0 5px;
+     padding: 10px;
      box-sizing: border-box;
      background-color: #000;
      color: inherit;
      overflow: scroll;
  }
 
- #console::-webkit-scrollbar {
+ #console_container::-webkit-scrollbar {
      display: none;
  }
 

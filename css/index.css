@@ -20,11 +20,9 @@ iframe {
     border: none;
 }
 
-#App {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
+body {
     background-color: rgb(55, 47, 61);
+    overflow: hidden;
 }
 
 .window {
@@ -48,7 +46,7 @@ iframe {
     justify-content: space-between;
     width: 100%;
     min-height: 25px;
-    padding-left: 5px;
+    padding-left: 10px;
     background-color: #3a3a3a;
     color: #d6d6d6;
     box-sizing: border-box;
