@@ -62,7 +62,7 @@ export class consoleOBJ {
 
             case "projeto":
                 if (msg[1] != null) {
-                    fetch(window.location.href + "/pages/" + msg[1] + '.html').then(response => {
+                    fetch(window.location.href + "pages/" + msg[1] + '.html').then(response => {
                         if (response.status == 200) {
                             if (windowOBJ.getWindowOBJ(msg[1]) instanceof Element) {
                                 this.echo("<br>Projeto já aberto.<br><br>", false)
