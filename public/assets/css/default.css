@@ -1,0 +1,107 @@
+:root {
+    --background-color: #f5c6e1;
+    --foreground-color: #f8f8f8;
+    --hover-color: #b8b8b8;
+    --hover-color-warning: #ff6060;
+    --text-color: #111;
+}
+
+.dark-theme {
+    --background-color: #372f3d;
+    --foreground-color: #3a3a3a;
+    --hover-color: #686868;
+    --hover-color-warning: #d44b4b;
+    --text-color: #eee;
+}
+
+@font-face {
+    font-family: 'Barlow';
+    src: url('../fonts/Barlow-Regular.ttf');
+}
+
+* {
+    font-family: 'Barlow';
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+
+body {
+    background-color: var(--background-color);
+    overflow: hidden;
+}
+
+.app {
+    position: absolute;
+    min-width: 150px;
+    min-height: 100px;
+    resize: both;
+    border-radius: 5px;
+    overflow: hidden;
+    color: var(--text-color);
+    border: 1px solid var(--foreground-color);
+}
+
+.app_fullscreen {
+    border: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 25px;
+    cursor: grab;
+    color: inherit;
+    background-color: var(--foreground-color);
+}
+
+.header_title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 5px;
+}
+
+.header_menu {
+    display: flex;
+}
+
+.header_menu_item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 100%;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.header_menu_item_minimize:after {
+    content: '\2500';
+}
+
+.header_menu_item_resize:after {
+    content: '\26F6';
+}
+
+.header_menu_item_minimize:hover,
+.header_menu_item_resize:hover {
+    background-color: var(--hover-color);
+}
+
+.header_menu_item_close:after {
+    content: '\2715';
+}
+
+.header_menu_item_close:hover {
+    background-color: var(--hover-color-warning);
+}
+
+.app_content {
+    width: 100%;
+    height: 100%;
+}
