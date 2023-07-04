@@ -20,11 +20,15 @@ export class App_ {
 
         this.element.appendChild(this.Header_.element);
         this.element.appendChild(this.content);
-        document.body.appendChild(this.element);
+
     }
 
     static open(appName) {
-        this.#_apps[appName] = new App_(appName);
+        if (this.#_apps[appName] == undefined) this.#_apps[appName] = new App_(appName);
+
+        else if (document.body.contains(this.#_apps[appName].element)) return;
+
+        document.body.appendChild(this.#_apps[appName].element);
     }
 
     static resize(appName) {
@@ -46,7 +50,6 @@ export class App_ {
 
     }
 
-
     static close(appName) {
         var app = this.#_apps[appName].element;
         app.animate([
@@ -54,12 +57,11 @@ export class App_ {
             { transform: 'scale(0)' }
         ], {
             duration: 200,
-            easing: 'ease',
+            easing: 'ease-in-out',
         });
         setTimeout(() => {
             app.remove();
-            delete this.#_apps[appName];
-        }, 190);
-
+            // delete this.#_apps[appName];
+        }, 150);
     }
 }
