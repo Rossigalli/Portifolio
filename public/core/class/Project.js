@@ -1,10 +1,10 @@
 var Project_ = (() => {
-    var Projects = { "Console": location.href + "../app/projects/Console" };
+    var Projects = { 'Console': location.href + '../app/projects/Console' };
 
     function createElement(appName) {
-        var element = document.createElement("iframe");
-        element.id = appName + "_project";
-        element.classList.add("app_content");
+        var element = document.createElement('iframe');
+        element.id = appName + '_project';
+        element.classList.add('app_content');
         element.src = Projects[appName];
 
         return element;

@@ -10,9 +10,9 @@ export class App_ {
         this.content = Project_.getProject(appName);
 
         if (this.content !== null) {
-            this.element = document.createElement("div");
+            this.element = document.createElement('div');
             this.element.id = appName;
-            this.element.classList.add("app");
+            this.element.classList.add('app');
 
             this.Header_ = new Header_(appName);
 
@@ -21,7 +21,7 @@ export class App_ {
 
             this.drag(this.element);
         } else {
-            this.status = "not found";
+            this.status = 'not found';
         }
 
     }
@@ -31,9 +31,9 @@ export class App_ {
 
         else if (document.body.contains(this.#_apps[appName].element)) return;
 
-        if (this.#_apps[appName].status !== "not found") {
+        if (this.#_apps[appName].status !== 'not found') {
             document.body.appendChild(this.#_apps[appName].element);
-            this.#_apps[appName].status = "open";
+            this.#_apps[appName].status = 'open';
         } else {
             delete this.#_apps[appName];
         }
@@ -41,19 +41,19 @@ export class App_ {
 
     static resize(appName) {
         var app = this.#_apps[appName].element;
-        app.classList.toggle("app_fullscreen");
+        app.classList.toggle('app_fullscreen');
 
-        if (app.style.width == "100vw" && app.style.height == "100vh") {
+        if (app.style.width == '100vw' && app.style.height == '100vh') {
             app.style.width = this.#_apps[appName].previousResize.width;
             app.style.height = this.#_apps[appName].previousResize.height;
             app.style.top = this.#_apps[appName].previousResize.top;
             app.style.left = this.#_apps[appName].previousResize.left;
         } else {
             this.#_apps[appName].previousResize = { width: app.style.width, height: app.style.height, top: app.style.top, left: app.style.left };
-            app.style.width = "100vw";
-            app.style.height = "100vh";
-            app.style.top = "0";
-            app.style.left = "0";
+            app.style.width = '100vw';
+            app.style.height = '100vh';
+            app.style.top = '0';
+            app.style.left = '0';
         }
 
     }
@@ -69,7 +69,7 @@ export class App_ {
         });
         setTimeout(() => {
             app.element.remove();
-            app.status = "closed"
+            app.status = 'closed'
         }, 150);
     }
 
@@ -105,8 +105,8 @@ export class App_ {
             pos2 = pos4 - clientPos.clientY;
             pos3 = clientPos.clientX;
             pos4 = clientPos.clientY;
-            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+            elmnt.style.top = (elmnt.offsetTop - pos2) + 'px';
+            elmnt.style.left = (elmnt.offsetLeft - pos1) + 'px';
         }
 
         function closeDragElement() {
