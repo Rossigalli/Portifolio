@@ -1,3 +1,4 @@
+import { Project_ } from './Project.js';
 import { Header_ } from './Header.js';
 
 export class App_ {
@@ -5,6 +6,7 @@ export class App_ {
     previousResize = {};
 
     constructor(appName) {
+        this.content = Project_.getProject(appName);
 
         this.element = document.createElement("div");
         this.element.id = appName;
@@ -13,6 +15,7 @@ export class App_ {
         this.Header_ = new Header_(appName);
 
         this.element.appendChild(this.Header_.element);
+        this.element.appendChild(this.content);
 
         this.drag(this.element);
     }
