@@ -9,16 +9,21 @@ export class App_ {
     constructor(appName) {
         this.content = Project_.getProject(appName);
 
-        this.element = document.createElement("div");
-        this.element.id = appName;
-        this.element.classList.add("app");
+        if (this.content !== null) {
+            this.element = document.createElement("div");
+            this.element.id = appName;
+            this.element.classList.add("app");
 
-        this.Header_ = new Header_(appName);
+            this.Header_ = new Header_(appName);
 
-        this.element.appendChild(this.Header_.element);
-        this.element.appendChild(this.content);
+            this.element.appendChild(this.Header_.element);
+            this.element.appendChild(this.content);
 
-        this.drag(this.element);
+            this.drag(this.element);
+        } else {
+            this.status = "not found";
+        }
+
     }
 
     static open(appName) {
@@ -26,8 +31,12 @@ export class App_ {
 
         else if (document.body.contains(this.#_apps[appName].element)) return;
 
-        document.body.appendChild(this.#_apps[appName].element);
-        this.#_apps[appName].status = "open";
+        if (this.#_apps[appName].status !== "not found") {
+            document.body.appendChild(this.#_apps[appName].element);
+            this.#_apps[appName].status = "open";
+        } else {
+            delete this.#_apps[appName];
+        }
     }
 
     static resize(appName) {
