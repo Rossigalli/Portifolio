@@ -4,6 +4,7 @@ import { Header_ } from './Header.js';
 export class App_ {
     static #_apps = [];
     previousResize = {};
+    status = null;
 
     constructor(appName) {
         this.content = Project_.getProject(appName);
@@ -26,6 +27,7 @@ export class App_ {
         else if (document.body.contains(this.#_apps[appName].element)) return;
 
         document.body.appendChild(this.#_apps[appName].element);
+        this.#_apps[appName].status = "open";
     }
 
     static resize(appName) {
@@ -48,8 +50,8 @@ export class App_ {
     }
 
     static close(appName) {
-        var app = this.#_apps[appName].element;
-        app.animate([
+        var app = this.#_apps[appName];
+        app.element.animate([
             { transform: 'scale(1)' },
             { transform: 'scale(0)' }
         ], {
@@ -57,8 +59,8 @@ export class App_ {
             easing: 'ease-in-out',
         });
         setTimeout(() => {
-            app.remove();
-            // delete this.#_apps[appName];
+            app.element.remove();
+            app.status = "closed"
         }, 150);
     }
 
