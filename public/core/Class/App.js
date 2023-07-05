@@ -6,13 +6,17 @@ export class App_ {
     previousResize = {};
     status = null;
 
-    constructor(appName) {
+    constructor(appName, config = { width: '50vw', height: '60vh', top: '20vh', left: '25vw' }) {
         this.content = Project_.getProject(appName);
 
         if (this.content !== null) {
             this.element = document.createElement('div');
             this.element.id = appName;
             this.element.classList.add('app');
+            this.element.style.width = config.width;
+            this.element.style.height = config.height;
+            this.element.style.top = config.top;
+            this.element.style.left = config.left;
 
             this.Header_ = new Header_(appName);
 
