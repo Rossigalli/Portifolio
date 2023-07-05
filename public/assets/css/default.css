@@ -36,7 +36,7 @@ body {
 
 .app {
     position: absolute;
-    min-width: 150px;
+    min-width: 200px;
     min-height: 100px;
     resize: both;
     border-radius: 5px;

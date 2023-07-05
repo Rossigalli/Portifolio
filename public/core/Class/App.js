@@ -1,4 +1,3 @@
-// import { Window_ } from './Window.js';
 import { Header_ } from './Header.js';
 
 export class App_ {
@@ -12,19 +11,14 @@ export class App_ {
         this.element.classList.add("app");
 
         this.Header_ = new Header_(appName);
-        this.Header_.drag(this.element);
-
-        this.content = document.createElement("iframe");
-        // this.content.src = "http://localhost";
-        this.content.classList.add("app_content");
 
         this.element.appendChild(this.Header_.element);
-        this.element.appendChild(this.content);
 
+        this.drag(this.element);
     }
 
     static open(appName) {
-        if (this.#_apps[appName] == undefined) this.#_apps[appName] = new App_(appName);
+        if (!this.#_apps.includes(appName)) this.#_apps[appName] = new App_(appName);
 
         else if (document.body.contains(this.#_apps[appName].element)) return;
 
@@ -63,5 +57,48 @@ export class App_ {
             app.remove();
             // delete this.#_apps[appName];
         }, 150);
+    }
+
+    drag(elmnt) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        var iframe = null
+        this.Header_.element.onmousedown = dragMouseDown.bind(this.Header_);
+
+        function dragMouseDown(e) {
+            if (e.target !== this.element && e.target !== this.title) return;
+            iframe = this.element.nextElementSibling;
+
+            e = e || window.event;
+            e.preventDefault();
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            document.onmousemove = elementDrag;
+
+            iframe.contentDocument.onmousemove = function (e) {
+                e.preventDefault();
+                var iframeX = this.getBoundingClientRect().left + e.clientX;
+                var iframeY = this.getBoundingClientRect().top + this.getBoundingClientRect().height + e.clientY;
+                elementDrag(e, { clientX: iframeX, clientY: iframeY });
+            }.bind(this.element);
+        }
+
+        function elementDrag(e, clientPos) {
+            e = e || window.event;
+            clientPos = clientPos || e;
+            e.preventDefault();
+            pos1 = pos3 - clientPos.clientX;
+            pos2 = pos4 - clientPos.clientY;
+            pos3 = clientPos.clientX;
+            pos4 = clientPos.clientY;
+            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        }
+
+        function closeDragElement() {
+            document.onmouseup = null;
+            document.onmousemove = null;
+            iframe.contentDocument.onmousemove = null;
+        }
     }
 }

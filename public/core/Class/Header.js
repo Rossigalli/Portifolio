@@ -34,47 +34,4 @@ export class Header_ {
         this.element.appendChild(this.title);
         this.element.appendChild(this.menu);
     }
-
-    drag(elmnt) {
-        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        var iframe = null
-        this.element.onmousedown = dragMouseDown.bind(this);
-
-        function dragMouseDown(e) {
-            if (e.target !== this.element && e.target !== this.title) return;
-            iframe = this.element.nextElementSibling;
-
-            e = e || window.event;
-            e.preventDefault();
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            document.onmouseup = closeDragElement;
-            document.onmousemove = elementDrag;
-
-            iframe.contentDocument.onmousemove = function (e) {
-                e.preventDefault();
-                var iframeX = this.getBoundingClientRect().left + e.clientX;
-                var iframeY = this.getBoundingClientRect().top + this.getBoundingClientRect().height + e.clientY;
-                elementDrag(e, { clientX: iframeX, clientY: iframeY });
-            }.bind(this.element);
-        }
-
-        function elementDrag(e, clientPos) {
-            e = e || window.event;
-            clientPos = clientPos || e;
-            e.preventDefault();
-            pos1 = pos3 - clientPos.clientX;
-            pos2 = pos4 - clientPos.clientY;
-            pos3 = clientPos.clientX;
-            pos4 = clientPos.clientY;
-            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-        }
-
-        function closeDragElement() {
-            document.onmouseup = null;
-            document.onmousemove = null;
-            iframe.contentDocument.onmousemove = null;
-        }
-    }
 }
