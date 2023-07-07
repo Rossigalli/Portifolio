@@ -1,3 +1,5 @@
 .gitignore
 Old
 public/core/class/App alt.js
+app/projects/*
+!app/projects/Console

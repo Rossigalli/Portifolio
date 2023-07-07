@@ -2,6 +2,8 @@ import { App_ } from './App.js';
 
 export class Header_ {
     constructor(appName) {
+        appName = appName.charAt(0).toUpperCase() + appName.slice(1);
+
         this.element = document.createElement('div');
         this.element.id = appName + '_header';
         this.element.classList.add('header');

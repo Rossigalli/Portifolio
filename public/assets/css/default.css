@@ -11,7 +11,7 @@
     --foreground-color: #3a3a3a;
     --hover-color: #686868;
     --hover-color-warning: #d44b4b;
-    --text-color: #eee;
+    --text-color: #d6d6d6;
 }
 
 @font-face {
@@ -36,6 +36,8 @@ body {
 
 .app {
     position: absolute;
+    display: flex;
+    flex-direction: column;
     min-width: 200px;
     min-height: 100px;
     resize: both;
@@ -103,5 +105,7 @@ body {
 
 .app_content {
     width: 100%;
-    height: 100%;
+    min-height: 1px;
+    flex-grow: 1;
+    overflow: hidden;
 }

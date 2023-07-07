@@ -1,0 +1,49 @@
+ @font-face {
+     font-family: 'Barlow';
+     src: url('../../../../public/assets/fonts/Barlow-Regular.ttf');
+ }
+
+ * {
+     margin: 0;
+     padding: 0;
+     font-family: 'Barlow';
+     color: #d6d6d6;
+     box-sizing: border-box;
+ }
+
+ td {
+     padding-right: 10px;
+     padding-top: 3px;
+     vertical-align: text-top;
+ }
+
+ #Console_container {
+     display: flex;
+     flex-direction: column-reverse;
+     width: 100%;
+     height: 100%;
+     min-height: 1px;
+     padding: 5px;
+     overflow-y: scroll;
+     background-color: #000;
+ }
+
+ #console_container::-webkit-scrollbar {
+     display: none;
+ }
+
+ #Console_prefix {
+     position: relative;
+     top: 0;
+     width: fit-content;
+     height: 20px;
+ }
+
+ #console_input {
+     min-height: 1px;
+     flex-grow: 1;
+     cursor: default;
+     text-indent: 105px;
+     outline: none;
+     transform: translateY(-20px);
+ }

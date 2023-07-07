@@ -4,11 +4,11 @@ import { Header_ } from './Header.js';
 export class App_ {
     static #_apps = [];
     previousResize = {};
-    status = null;
+    status = '';
+    message = '';
 
     constructor(appName, config = { width: '50vw', height: '60vh', top: '20vh', left: '25vw' }) {
         this.content = Project_.getProject(appName);
-
         if (this.content !== null) {
             this.element = document.createElement('div');
             this.element.id = appName;
@@ -31,16 +31,20 @@ export class App_ {
     }
 
     static open(appName) {
-        if (!this.#_apps.includes(appName)) this.#_apps[appName] = new App_(appName);
+        if (!(appName in this.#_apps)) this.#_apps[appName] = new App_(appName);
 
-        else if (document.body.contains(this.#_apps[appName].element)) return;
+        else if (parent.document.body.contains(this.#_apps[appName].element)) return 'App já está aberto';
 
         if (this.#_apps[appName].status !== 'not found') {
-            document.body.appendChild(this.#_apps[appName].element);
+            parent.document.body.appendChild(this.#_apps[appName].element);
+            this.message = 'App aberto com sucesso';
             this.#_apps[appName].status = 'open';
+
         } else {
+            this.message = 'App não encontrado';
             delete this.#_apps[appName];
         }
+        return this.message
     }
 
     static resize(appName) {
@@ -73,7 +77,8 @@ export class App_ {
         });
         setTimeout(() => {
             app.element.remove();
-            app.status = 'closed'
+            app.message = 'App fechado com sucesso';
+            this.#_apps.length > 5 ? delete this.#_apps[appName] : this.#_apps[appName].status = 'closed';
         }, 150);
     }
 

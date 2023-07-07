@@ -1,5 +1,14 @@
 var Project_ = (() => {
-    var Projects = { 'Console': location.href + '../app/projects/Console' };
+    var Projects = { 'console': parent.location.href + '../app/projects/Console' };
+
+    function getProject(appName) {
+        appName = appName.toLowerCase();
+        if (appName in Projects) {
+            return createElement(appName);
+        } else {
+            return null
+        }
+    }
 
     function createElement(appName) {
         var element = document.createElement('iframe');
@@ -11,13 +20,7 @@ var Project_ = (() => {
     }
 
     return {
-        getProject: (appName) => {
-            if (appName in Projects) {
-                return createElement(appName);
-            } else {
-                return null
-            }
-        }
+        getProject
     }
 })()
 
